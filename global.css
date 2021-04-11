@@ -1,0 +1,40 @@
+#heading1{
+    text-align: center;
+    color:white;
+}
+
+label{
+    color: white;
+}
+
+form{
+   text-align: center; 
+   background-color: grey;
+    opacity: 0.8;
+}
+
+
+body{
+    background-image: url('covidimage.jpeg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-size: 100% 100%;
+}
+
+.form-group{
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+}
+
+.outputResult{
+    background-color: white;
+    border: white;
+    opacity: 0.5;
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+}

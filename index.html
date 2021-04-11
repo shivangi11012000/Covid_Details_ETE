@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Covid Data</title>
+        <link rel="stylesheet" href="global.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel=”stylesheet” href=”css/bootstrap.css”>
+        <link rel=”stylesheet” href=”css/bootstrap-responsive.css”>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+        <div class="container-fluid">
+            <h1 id="heading1">Covid Details</h1><br>
+            <form class="form-inline">
+                <div class="form-group">
+                  <label for="country">Country:</label>
+                  <input type="text" class="form-control" id="country" placeholder="Enter Country" required>
+                </div>
+                <div class="form-group">
+                  <label for="startdate">StartDate:</label>
+                  <input type="date"  class="form-control" id="startdate" required>
+                </div>
+                <div class="form-group">
+                    <label for="enddate">EndDate:</label>
+                    <input type="date" class="form-control" id="enddate" required>
+                </div>
+                <button type="submit" formaction="javascript:submit(document.getElementById('country').value,document.getElementById('startdate').value,document.getElementById('enddate').value)">Submit</button>
+            </form>         
+            <br>
+            <br>
+            <div id="cases" >
+            </div>   
+            <marquee style="background-color: cornsilk;opacity: 0.6;"> This Page takes time to load , Please wait for the data to load</marquee>
+        </div>
+
+    </body>
+
+    
+
+</html>
+
+<script type="text/javascript" language="javascript">
+
+    function submit(country, startDate, endDate)
+    {
+            onload
+            var urlvariable;
+            urlvariable = "text";
+            var ItemJSON;
+            URL = "https://api.covid19api.com/country/" + country + "?from=" + startDate + "T00:00:00Z&to=" + endDate + "T00:00:00Z"; //Your URL
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
+            xmlhttp.open("GET", URL, false);
+            xmlhttp.setRequestHeader("Content-Type", "application/json");
+            xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
+            xmlhttp.send(ItemJSON);
+            //alert(xmlhttp.responseText);
+            var myArr = JSON.parse(xmlhttp.responseText);
+            myFunction(myArr)
+    }
+    function myFunction(arr) {
+        var out = "";
+        var i;
+        for(i = 0; i < arr.length; i++) {
+            var codeBlock = '<div style="background-color: aliceblue;border-radius: 5px;text-align: center;width: fit-content;margin-bottom: 2em;padding: 10px;vertical-align: middle;margin-left: auto; margin-right: auto;">' +
+            '<Label style="color: red;">Date: ' + arr[i].Date + ' </Label><Br>' +
+            '<Label style="color: black;">Confirmed Cases: ' + arr[i].Confirmed + ' </Label><Br>' +
+            '<Label style="color: black;">Active Cases:' + arr[i].Active + '</Label><Br>' +
+            '<Label style="color: black;">Death:' + arr[i].Deaths + '</Label><Br>' + '</div>';
+            out += codeBlock;
+        }
+        document.getElementById("cases").innerHTML = out
+        
+    }
+
+    function callbackFunction(xmlhttp)
+    {
+        //alert(xmlhttp.responseXML);
+    }
+
+</script>
